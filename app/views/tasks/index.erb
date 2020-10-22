@@ -1,1 +1,6 @@
-test
+<h1> TASKS </h1>
+
+  <% @tasks.each do |task| %>
+    <h2><%= task.description %> </h2>
+    <p><%= task.day %> </p>
+  <% end %>

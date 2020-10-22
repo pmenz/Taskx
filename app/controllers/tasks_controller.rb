@@ -16,6 +16,7 @@ class TasksController < ApplicationController
     #Index
     #make a get reuest to '/tasks'
     get '/tasks' do
+      @tasks = Task.all
       erb :'tasks/index'
     end
     #Show
