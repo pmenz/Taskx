@@ -5,5 +5,7 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 
-use UserController
+
 run ApplicationController
+use UsersController
+use TasksController
