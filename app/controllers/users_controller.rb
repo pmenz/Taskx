@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+#signup
+
   get '/users/signup' do
     erb :'/users/signup'
   end
@@ -13,6 +15,8 @@ class UsersController < ApplicationController
     redirect "/users/#{@user.id}"
   end
 
+ #Login
+
   post '/users/login' do
     @user = User.find_by(username: params[:username])
     if (!@user.nil? && (@user.password == params[:password]))
@@ -23,8 +27,10 @@ class UsersController < ApplicationController
     end
   end
 
+#show tasks
+
   get '/users/:id' do
-    "test #{params[:id]}"
+    erb :"users/show"
   end
 
 end

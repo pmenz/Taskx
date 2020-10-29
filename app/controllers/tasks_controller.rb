@@ -2,7 +2,20 @@ class TasksController < ApplicationController
 
 #CRUD
 
-  #CREATE
+  #CREATE/NEW
+  get '/tasks/create' do
+    erb :'/tasks/create'
+  end
+
+  post '/tasks/create' do
+    #params[:description]
+    #params[:day]
+    @task = Task.create(
+      description: params[:description],
+      day:         params[:day])
+    redirect "/tasks"
+  end
+
 
     #New
     #Makes a get reques to '/tasks/new'
