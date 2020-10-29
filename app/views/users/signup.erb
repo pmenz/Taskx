@@ -1,8 +1,13 @@
-<h1> Signup page </h1>
+<h1 style="text-align:left"> Signup page </h1>
 
-
-<form action='/users/signup' method="POST">
-  Username: <input type=text name="username">
-  Password: <input type=password name="password">
-  <input type=submit>
+<p>
+<form style="text-align:center" action='/users/signup' method="POST">
+  <pre>
+    Username: <input type="text" name="username">
+    Password: <input type="password" name="password">
+    <pr>
+    <input type="submit" value="Signup">
+    <% if @login_error %>
+      <h3><%= @login_error %></h3>
+    <% end %>
   <form>
