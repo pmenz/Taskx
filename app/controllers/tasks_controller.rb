@@ -10,10 +10,20 @@ class TasksController < ApplicationController
   post '/tasks/create' do
     #params[:description]
     #params[:day]
-    @task = Task.create(
-      description: params[:description],
-      day:         params[:day])
+    #@task = Task.create(
+    #  description: params[:description],
+    #  day:         params[:day])
+    #redirect "/tasks"
+
+    task = Task.new(params)
+    if !task.description.empty? && !task.day.empty?
+      task.save
     redirect "/tasks"
+    else
+      @create_error = "Please enter missing information"
+      erb :'/tasks/create'
+    end
+
   end
 
 
@@ -33,8 +43,6 @@ class TasksController < ApplicationController
       erb :'tasks/index'
     end
     #Show
-    #make aget request to 'recipes/:id'
-
 
     #UPDATE
 
