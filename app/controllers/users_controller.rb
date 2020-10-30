@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   post '/users/login' do
     @user = User.find_by(username: params[:username])
     if (!@user.nil? && (@user.password == params[:password]))
+      session[:user_id] = @user.id
       redirect "/users/#{@user.id}"
     else
       @login_error = "Please enter correct credentials"
@@ -30,7 +31,12 @@ class UsersController < ApplicationController
 #show tasks
 
   get '/users/:id' do
+    @user = User.find(params[:id])
     erb :"users/show"
   end
 
+  post '/logout' do
+    erb :'/'
+    @user_id={}
+  end
 end

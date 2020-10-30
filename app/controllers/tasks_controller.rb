@@ -3,11 +3,11 @@ class TasksController < ApplicationController
 #CRUD
 
   #CREATE/NEW
-  get '/tasks/create' do
-    erb :'/tasks/create'
+  get '/tasks/new' do
+    erb :'/tasks/new'
   end
 
-  post '/tasks/create' do
+  post '/tasks' do
     #params[:description]
     #params[:day]
     #@task = Task.create(
@@ -15,13 +15,13 @@ class TasksController < ApplicationController
     #  day:         params[:day])
     #redirect "/tasks"
 
-    task = Task.new(params)
-    if !task.description.empty? && !task.day.empty?
+    @task = current_user.tasks.new(params)
+    if !tasks.description.empty? && !tasks.day.empty?
       task.save
-    redirect "/tasks"
+    redirect "/tasks/#{@task.id}"
     else
       @create_error = "Please enter missing information"
-      erb :'/tasks/create'
+      erb :'/tasks/new'
     end
 
   end
@@ -33,13 +33,16 @@ class TasksController < ApplicationController
     #Create
     #Make a post request to '/tasks'
 
-
+    get '/tasks/:id' do
+      @task = current_user.tasks.find_by(id: params[:id])
+      erb :'tasks/new'
+    end
   #READ
 
     #Index
     #make a get reuest to '/tasks'
     get '/tasks' do
-      @tasks = Task.all
+      @tasks = current_user.tasks
       erb :'tasks/index'
     end
     #Show
@@ -53,5 +56,11 @@ class TasksController < ApplicationController
 
     #DESTROY
 
+
+    helpers do
+      def current_user
+        User.first
+      end
+    end
 
 end
