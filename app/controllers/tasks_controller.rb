@@ -16,13 +16,9 @@ class TasksController < ApplicationController
     #redirect "/tasks"
 
     @task = current_user.tasks.new(params)
-    if !tasks.description.empty? && !tasks.day.empty?
-      task.save
-    redirect "/tasks/#{@task.id}"
-    else
-      @create_error = "Please enter missing information"
+    binding.pry
       erb :'/tasks/new'
-    end
+
 
   end
 

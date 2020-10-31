@@ -1,21 +1,24 @@
 class UsersController < ApplicationController
 
-#signup
 
   get '/users/signup' do
     erb :'/users/signup'
   end
 
   post '/users/signup' do
-    #params[:username]
-    #parans[:password]
-    @user = User.create(
-      username: params[:username],
-      password: params[:password])
-    redirect "/users/#{@user.id}"
+    @user = User.create(params)
+    if
+     (!@user.username.empty?) && (!@user.password.empty?)
+      redirect "/users/#{@user.id}"
+    elseif
+      User.find_by(username: params[:@user.username]).exist?
+      @signup_error = "Username already exist, please try again"
+      erb :"users/signup"
+    else
+      @signup_error = "Please enter correct credentials"
+      erb :"users/signup"
+    end
   end
-
- #Login
 
   post '/users/login' do
     @user = User.find_by(username: params[:username])
@@ -28,15 +31,13 @@ class UsersController < ApplicationController
     end
   end
 
-#show tasks
-
   get '/users/:id' do
     @user = User.find(params[:id])
     erb :"users/show"
   end
 
   post '/logout' do
-    erb :'/'
-    @user_id={}
+    sessions.clear
+    redirect '/'
   end
 end
