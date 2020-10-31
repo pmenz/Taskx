@@ -1,7 +1,6 @@
 class TasksController < ApplicationController
 
 #CRUD
-
   #CREATE/NEW
   get '/tasks/new' do
     erb :'/tasks/new'
@@ -14,36 +13,27 @@ class TasksController < ApplicationController
     #  description: params[:description],
     #  day:         params[:day])
     #redirect "/tasks"
-
     @task = current_user.tasks.new(params)
-
-      erb :'/tasks/new'
-
-
+    erb :'/users/show'
   end
 
-
-    #New
-    #Makes a get reques to '/tasks/new'
-
-    #Create
-    #Make a post request to '/tasks'
-
+#READ
     get '/tasks/:id' do
-      @task = current_user.tasks.find_by(id: params[:id])
-      erb :'tasks/new'
+      @tasks = Task.all
+      erb :'users/show'
     end
-  #READ
 
-    #Index
-    #make a get reuest to '/tasks'
     get '/tasks' do
-      @tasks = current_user.tasks
+      @tasks = Task.all
       erb :'tasks/index'
     end
     #Show
 
-    #UPDATE
+#UPDATE
+    get 'tasks/:id/edit' do
+      @task = Task.find(params[:id])
+      erb :'tasks/new'
+    end
 
       #Edit
       #make a get request to '/tasks/:id/edit'
@@ -53,10 +43,5 @@ class TasksController < ApplicationController
     #DESTROY
 
 
-    helpers do
-      def current_user
-        User.first
-      end
-    end
 
 end
