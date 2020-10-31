@@ -16,7 +16,7 @@ class TasksController < ApplicationController
     #redirect "/tasks"
 
     @task = current_user.tasks.new(params)
-    binding.pry
+
       erb :'/tasks/new'
 
 
