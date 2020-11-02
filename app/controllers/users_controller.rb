@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
 
 #READ
+
   get '/users/login' do
-      @user = User.find(params[:id])
+    if logged_in?
+      redirect to '/users/'
+    else
       erb :"/welcome"
   end
 
@@ -26,7 +29,10 @@ class UsersController < ApplicationController
 #CREATE
 
   get '/users/signup' do
-    erb :'/users/signup'
+    if logged_in?
+      redirect to '/users/:id'
+    end
+    erb :"/users/signup"
   end
 
   post '/users/signup' do
@@ -34,14 +40,14 @@ class UsersController < ApplicationController
     if
      (!@user.username.empty?) && (!@user.password.empty?)
      session[:user_id] = @user.id
-     redirect "/users/#{@user.id}"
+     redirect '/users/#{@user.id}'
     elseif
      User.find_by(username: params[:@user.username]).exist?
      @signup_error = "Username already exist, please try again"
      erb :"users/signup"
     else
-      @signup_error = "Please enter correct credentials"
-      erb :"users/signup"
+     @signup_error = "Please enter correct credentials"
+     erb :"users/signup"
     end
   end
 
