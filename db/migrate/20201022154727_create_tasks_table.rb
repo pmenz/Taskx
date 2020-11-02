@@ -3,7 +3,8 @@ class CreateTasksTable < ActiveRecord::Migration
     create_table :tasks do |t|
       t.string  :description
       t.integer :user_id
-      t.string  :day
+      t.string  :due
+      t.string  :status
     end
   end
 end

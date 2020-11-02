@@ -2,23 +2,23 @@ class UsersController < ApplicationController
 
 #READ
 
-  get '/users/login' do
+  get '/welcome' do
     if logged_in?
-      redirect to '/users/'
+      redirect to '/users/:id'
     else
-      erb :"/welcome"
-  end
-
-  post '/users/login' do
-    @user = User.find_by(username: params[:username])
-    if (@user.password == params[:password])
-#    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      redirect "/users/#{@user.id}"
-    else
-      @login_error = "Please enter correct credentials"
       erb :"/welcome"
     end
+  end
+
+  post '/welcome' do
+     @user = User.find_by(username: params[:username])
+     if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect "/users/#{@user.id}"
+     else
+      @login_error = "Please enter correct credentials"
+      erb :"/welcome"
+     end
   end
 
   get '/users/:id' do
@@ -51,13 +51,10 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/users/:id' do
-    @user = User.find(params[:id])
-    erb :"users/show"
-  end
 
   post '/logout' do
     sessions.clear
     redirect '/'
   end
+
 end
