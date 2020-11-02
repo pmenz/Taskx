@@ -1,20 +1,37 @@
 class TasksController < ApplicationController
 
-#CRUD
   #CREATE/NEW
-  get '/tasks/new' do
+
+  get '/tasks' do
+    if !logged_in?
+      redirect to '/'
+    end
     erb :'/tasks/new'
   end
 
-  post '/tasks' do
-    #params[:description]
-    #params[:day]
-    #@task = Task.create(
-    #  description: params[:description],
-    #  day:         params[:day])
-    #redirect "/tasks"
-    @task = current_user.tasks.new(params)
-    erb :'/users/show'
+  get '/tasks/new' do
+    if !logged_in?
+      redirect to '/'
+    end
+    erb :'/tasks/new'
+  end
+
+  post '/tasks/new' do
+    @user = current_user
+    if !(params[:description]).empty?
+      @task = Task.create(
+      description: params[:description],
+      due:         params[:due],
+      status:      params[:status]
+      )
+#binding.pry
+      erb :'/users/show'
+    else
+#binding.pry
+      @create_error = "Description can't be empty"
+      erb :'/tasks/new'
+    end
+
   end
 
 #READ

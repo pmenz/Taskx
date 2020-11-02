@@ -1,10 +1,10 @@
-<h1 style="text-align:center"> Create Tasks </h1>
+<h1 style="text-align:center"> New Tasks </h1>
 
 <p>
-<form style="text-align:center" action='/tasks' method="POST">
+<form style="text-align:center" action='/tasks/new' method="POST">
     Description: <input type="textarea" name="description">
     <br></br>
-    Due date   : <input type="date" name="day">
+    Due date   : <input type="date" name="due">
     <br></br>
     <input type="submit" value="Create">
     <% if @create_error %>

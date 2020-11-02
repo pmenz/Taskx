@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     erb :'/users/signup'
   end
 
-  post "/users/signup" do
+  post '/users/signup' do
     if (params[:username]).empty? && (params[:password]).empty?
       @signup_error = "Something went wrong! please try again"
       erb :'/users/signup'
@@ -22,14 +22,14 @@ class UsersController < ApplicationController
       password: params[:password]
     )
       session[:user_id] = @user.id
-
-#     binding.pry
+#      binding.pry
       redirect "/users/#{@user.id}"
     end
   end
 
   get '/users/:id' do
-      binding.pry
+    @user ||= User.find_by(session[:user_id])
+#    binding.pry
 #    if logged_in?
 #     @user = User.find_by(params[:username])
       erb :'users/show'
@@ -49,7 +49,6 @@ class UsersController < ApplicationController
      @user = User.find_by(username: params[:username])
      if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      current_user = @user
       redirect to "/users/#{@user.id}"
      else
       @login_error = "Something went wrong! please try again"

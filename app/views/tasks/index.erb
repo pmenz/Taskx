@@ -1,6 +1,6 @@
 <h1> TASKS </h1>
 </br>
-  <% @tasks.each do |task| %>
+  <% @task.each do |task| %>
     <h2><%= task.day %> || <%= task.description %> <%= task.id %>
     <%= task.user_id %></h2>
     <a href="/tasks/<%=task.id%>">Show</a>
