@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       password: params[:password]
     )
       session[:user_id] = @user.id
-      @task = Task.all
+      @tasks = current_user.tasks
       erb :"/users/show"
     end
   end
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
      @user = User.find_by(username: params[:username])
      if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      @task = Task.all
+      @tasks = current_user.tasks
       erb :"/users/show"
      else
       @login_error = "Something went wrong! please try again"

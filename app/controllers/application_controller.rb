@@ -14,6 +14,10 @@ class ApplicationController < Sinatra::Base
     erb :'/welcome'
   end
 
+  post '/tasks/48/delete' do
+   "Hello World"
+  end
+
   helpers do
     def current_user
       return nil unless logged_in?

@@ -1,19 +1,7 @@
 class TasksController < ApplicationController
 
-  #CREATE/NEW
-=begin
-  get '/tasks' do
-    @user = current_user
-    if !logged_in?
-      redirect to '/'
-    end
-    @tasks = @user.tasks
-    erb :'/tasks/new'
-  end
-=end
-
+#CREATE/NEW
   get '/tasks/new' do
-#binding.pry
     @user = current_user
     if !logged_in?
       redirect to '/'
@@ -22,7 +10,6 @@ class TasksController < ApplicationController
   end
 
   post '/tasks/new' do
-#    binding.pry
     @user = current_user
     if !(params[:description]).empty?
       @task = current_user.tasks.create(
@@ -33,7 +20,6 @@ class TasksController < ApplicationController
       @tasks = current_user.tasks
       erb :'/users/show'
     else
-#binding.pry
       @create_error = "Description can't be empty"
       erb :'/tasks/new'
     end
@@ -50,8 +36,8 @@ class TasksController < ApplicationController
       @tasks = current_user.tasks
       erb :'tasks/index'
     end
-    #Show
 
+#UPDATE
     patch '/tasks/:id' do
       @task = current_user.tasks.find(params[:id])
       @task.update(
@@ -60,19 +46,24 @@ class TasksController < ApplicationController
       )
       redirect to "/users/#{current_user.id}"
     end
-#UPDATE
+
     get '/tasks/:id/edit' do
       @task = current_user.tasks.find(params[:id])
       erb :'tasks/edit'
     end
 
-      #Edit
-      #make a get request to '/tasks/:id/edit'
-      #Update
+#DESTROY
+    get '/tasks/:id/delete' do
+      @user = current_user
+      redirect '/tasks/:id/delete'
+    end
 
-
-    #DESTROY
-
+    delete '/tasks/:id/delete' do
+      binding.pry
+      task = current_user.tasks.find(params[:id])
+      task.destroy
+      erb :'/users/show'
+    end
 
 
 end

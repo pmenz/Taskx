@@ -4,9 +4,14 @@
 <form style="text-align:center" action='/tasks/<%= @task.id%>' method="POST">
 <!-- the line 6 is a Sinatra base code -->
     <input type="hidden" value="patch" name="_method">
-    Description: <input type="textarea" name="description" value="<%= @task.description%>">
+    <h4>
+    Description</br>
+    <textarea type="textarea" name="description" rows="8" cols="80" value="<%= @task.description%>">
+    </textarea>
     <br></br>
-    Due date   : <input type="date" name="due"  value="<%= @task.due%>">
+    Due Date
+    <input type="date" name="due"  value="<%= @task.due%>">
+    </h4>
     <br></br>
     <input type="submit" value="Update">
     <% if @create_error %>

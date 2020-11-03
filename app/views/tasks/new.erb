@@ -1,10 +1,11 @@
 <h1 style="text-align:center"> New Tasks </h1>
-<h1>Welcome , <%= current_user.username %></h1>
 <p>
 <form style="text-align:center" action='/tasks/new' method="POST">
-    Description: <input type="textarea" name="description">
+    <h4>Description</h4>
+    <textarea type="textarea" name="description" rows="8" cols="80">
+    </textarea>
     <br></br>
-    Due date   : <input type="date" name="due">
+    <h4>Due Date</h4><input type="date" name="due">
     <br></br>
     <%#binding.pry%>
     <input type="submit" value="Create">

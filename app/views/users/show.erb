@@ -1,20 +1,28 @@
 <h1>Welcome , <%= @user.username %></h1>
 <p>
-<p>
+<p><h3>
 <a href="/tasks/new">New task</a>
--->display the list of task and by whwn are due .
-
+</h3>
 <h2>YOUR TASKS </h2>
-
 
     <% @tasks.each do |task| %>
     <h3>
-     Due:         <%= task.due %><br>
-     Description  <%= task.description %><br>
-                  <%= task.id %>
-                  <%= task.user_id %><br>
-                  <a href="/tasks/<%= task.id%>/edit">Edit</a>
+      <div style="overflow: hidden">
+          <div style=" border:0px solid #cccccc ; float:left; padding-bottom:1000px; margin-bottom:-1000px">
+            <a href="/tasks/<%= task.id%>/edit" >
+              <button type="submit">Edit </buttom>
+              </a>
+          </div>
+          <div style=" border:0px solid #cccccc ; float:left; padding-bottom:1000px; margin-bottom:-1000px">
+            <form action="/tasks/<%=task.id%>/delete" method="post">
+              <input id="hidden" type='hidden' name='_method' value="delete"/>
+              <button type="submit">Delete Task </buttom>
+            </form>
+          </div>
+            <br>
+      Description: <%= task.description %><br>
+      Due:         <%= task.due %><br>
+      </div>
     </h3>
-
-                  <hr>
+    <hr>
     <% end %>
