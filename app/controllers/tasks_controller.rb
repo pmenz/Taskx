@@ -59,10 +59,11 @@ class TasksController < ApplicationController
     end
 
     delete '/tasks/:id/delete' do
+      #binding.pry
+      @task = current_user.tasks.find(params[:id])
+      @task.destroy
       binding.pry
-      task = current_user.tasks.find(params[:id])
-      task.destroy
-      erb :'/users/show'
+      redirect to "/users/#{current_user.id}"
     end
 
 
