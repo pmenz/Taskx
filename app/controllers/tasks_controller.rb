@@ -1,20 +1,19 @@
 class TasksController < ApplicationController
 
   #CREATE/NEW
-
+=begin
   get '/tasks' do
     @user = current_user
     if !logged_in?
       redirect to '/'
     end
-
     @tasks = @user.tasks
-binding.pry
     erb :'/tasks/new'
   end
+=end
 
   get '/tasks/new' do
-binding.pry
+#binding.pry
     @user = current_user
     if !logged_in?
       redirect to '/'
@@ -26,14 +25,12 @@ binding.pry
 #    binding.pry
     @user = current_user
     if !(params[:description]).empty?
-      @task = Task.create(
-      description: params[:description],
-      due:         params[:due],
-      status:      params[:status],
-      :user_id => @user.id
+      @task = current_user.tasks.create(
+        description: params[:description],
+        due:         params[:due],
+        status:      params[:status]
       )
-#binding.pry
-      @task = Task.all
+      @tasks = current_user.tasks
       erb :'/users/show'
     else
 #binding.pry
@@ -50,15 +47,23 @@ binding.pry
     end
 
     get '/tasks' do
-      @tasks = Task.all
+      @tasks = current_user.tasks
       erb :'tasks/index'
     end
     #Show
 
+    patch '/tasks/:id' do
+      @task = current_user.tasks.find(params[:id])
+      @task.update(
+        description: params[:description],
+        due:         params[:due]
+      )
+      redirect to "/users/#{current_user.id}"
+    end
 #UPDATE
-    get 'tasks/:id/edit' do
-      @task = Task.find(params[:id])
-      erb :'tasks/new'
+    get '/tasks/:id/edit' do
+      @task = current_user.tasks.find(params[:id])
+      erb :'tasks/edit'
     end
 
       #Edit

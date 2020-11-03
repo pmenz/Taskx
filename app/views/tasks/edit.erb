@@ -1,12 +1,14 @@
 <h1 style="text-align:center"> Edit Tasks </h1>
 
 <p>
-<form style="text-align:center" action='/tasks' method="POST">
-    Description: <input type="textarea" name="description">
+<form style="text-align:center" action='/tasks/<%= @task.id%>' method="POST">
+<!-- the line 6 is a Sinatra base code -->
+    <input type="hidden" value="patch" name="_method">
+    Description: <input type="textarea" name="description" value="<%= @task.description%>">
     <br></br>
-    Due date   : <input type="date" name="due">
+    Due date   : <input type="date" name="due"  value="<%= @task.due%>">
     <br></br>
-    <input type="submit" value="Create">
+    <input type="submit" value="Update">
     <% if @create_error %>
       <h3><%= @create_error %></h3>
     <% end %>
