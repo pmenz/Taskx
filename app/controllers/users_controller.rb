@@ -29,10 +29,11 @@ class UsersController < ApplicationController
 
   get '/users/:id' do
     @user ||= User.find_by(session[:user_id])
+    @task = Task.all
 #    binding.pry
 #    if logged_in?
 #     @user = User.find_by(params[:username])
-      erb :'users/show'
+    erb :'users/show'
 #    end
   end
 #READ
@@ -55,8 +56,6 @@ class UsersController < ApplicationController
       erb :'/welcome'
      end
   end
-
-
 
 #CREATE
   get "/logout" do

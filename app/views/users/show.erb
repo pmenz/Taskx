@@ -6,10 +6,10 @@
 
 <h2>YOUR TASKS </h2>
 
-<% if false %>
+<%# if false %>
     <% @task.each do |task| %>
     <h2><%= task.due %> || <%= task.description %> <%= task.id %>
     <%= task.user_id %></h2>
     <a href="/tasks/<%=task.id%>">Show</a>
     <% end %>
-<% end %>
+<%# end %>
