@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   get "/users/signup" do
     if logged_in?
-      redirect to "/users/:id"
+      redirect to "/users/show"
     end
     erb :'/users/signup'
   end
@@ -22,8 +22,10 @@ class UsersController < ApplicationController
       password: params[:password]
     )
       session[:user_id] = @user.id
+      @user = current_user
+      @task = Task.all
 #      binding.pry
-      redirect "/users/#{@user.id}"
+      erb :"/users/show"
     end
   end
 
@@ -50,7 +52,8 @@ class UsersController < ApplicationController
      @user = User.find_by(username: params[:username])
      if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect to "/users/#{@user.id}"
+      @task = Task.all
+      erb :"/users/show"
      else
       @login_error = "Something went wrong! please try again"
       erb :'/welcome'

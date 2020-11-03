@@ -3,13 +3,19 @@ class TasksController < ApplicationController
   #CREATE/NEW
 
   get '/tasks' do
+    @user = current_user
     if !logged_in?
       redirect to '/'
     end
+
+    @tasks = @user.tasks
+binding.pry
     erb :'/tasks/new'
   end
 
   get '/tasks/new' do
+binding.pry
+    @user = current_user
     if !logged_in?
       redirect to '/'
     end
@@ -17,14 +23,17 @@ class TasksController < ApplicationController
   end
 
   post '/tasks/new' do
+#    binding.pry
     @user = current_user
     if !(params[:description]).empty?
       @task = Task.create(
       description: params[:description],
       due:         params[:due],
-      status:      params[:status]
+      status:      params[:status],
+      :user_id => @user.id
       )
 #binding.pry
+      @task = Task.all
       erb :'/users/show'
     else
 #binding.pry

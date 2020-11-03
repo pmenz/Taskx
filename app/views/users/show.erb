@@ -1,15 +1,18 @@
 <h1>Welcome , <%= @user.username %></h1>
 <p>
 <p>
+<%= @user = current_user %>
 <a href="/tasks/new">New task</a>
 -->display the list of task and by whwn are due .
 
 <h2>YOUR TASKS </h2>
 
-<%# if false %>
+
     <% @task.each do |task| %>
-    <h2><%= task.due %> || <%= task.description %> <%= task.id %>
-    <%= task.user_id %></h2>
-    <a href="/tasks/<%=task.id%>">Show</a>
+    <h3>
+     Due:         <%= task.due %><br>
+     Description  <%= task.description %><br>
+                  <%= task.id %>
+                  <%= task.user_id %></h3>
+                  <hr>
     <% end %>
-<%# end %>
