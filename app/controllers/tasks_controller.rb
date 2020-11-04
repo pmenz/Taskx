@@ -3,9 +3,6 @@ class TasksController < ApplicationController
 #CREATE/NEW
   get '/tasks/new' do
     @user = current_user
-    if !logged_in?
-      redirect to '/'
-    end
     erb :'/tasks/new'
   end
 
@@ -32,11 +29,6 @@ class TasksController < ApplicationController
       erb :'users/show'
     end
 
-    get '/tasks' do
-      @tasks = current_user.tasks
-      erb :'tasks/index'
-    end
-
 #UPDATE
     patch '/tasks/:id' do
       @task = current_user.tasks.find(params[:id])
@@ -53,18 +45,9 @@ class TasksController < ApplicationController
     end
 
 #DESTROY
-    get '/tasks/:id/delete' do
-      @user = current_user
-      redirect '/tasks/:id/delete'
-    end
-
     delete '/tasks/:id/delete' do
-      #binding.pry
       @task = current_user.tasks.find(params[:id])
       @task.destroy
-      binding.pry
-      redirect to "/users/#{current_user.id}"
+      redirect '/users/show'
     end
-
-
 end

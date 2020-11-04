@@ -10,12 +10,19 @@ class ApplicationController < Sinatra::Base
     set :session_secret, 'secret'
   end
 
-  get "/" do
-    erb :'/welcome'
+  before do
+    login_path = (['/', '/welcome', '/users/signup'].include? request.path_info)
+    if !logged_in?
+      return if login_path
+      redirect to '/'
+    else
+      return unless login_path
+      redirect to '/users/show'
+    end
   end
 
-  post '/tasks/48/delete' do
-   "Hello World"
+  get "/" do
+    erb :'/welcome'
   end
 
   helpers do

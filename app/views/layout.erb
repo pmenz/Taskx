@@ -21,7 +21,9 @@
       <footer class="branding" style="text-align:left" >
       <small>&copy; 2020 <strong>Taskx</strong></small>
       </footer>
-      <a href="/logout">Logout</a>
+      <% if logged_in? %>
+        <a href="/logout">Logout</a>
+      <% end %>
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>

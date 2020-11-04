@@ -7,18 +7,14 @@
 
     <% @tasks.each do |task| %>
     <h3>
-      <div style="overflow: hidden">
-          <div style=" border:0px solid #cccccc ; float:left; padding-bottom:1000px; margin-bottom:-1000px">
-            <a href="/tasks/<%= task.id%>/edit" >
+      <div class='actions'>
+            <form action="/tasks/<%= task.id%>/edit" method="get">
               <button type="submit">Edit </buttom>
-              </a>
-          </div>
-          <div style=" border:0px solid #cccccc ; float:left; padding-bottom:1000px; margin-bottom:-1000px">
+            </form>
             <form action="/tasks/<%=task.id%>/delete" method="post">
               <input id="hidden" type='hidden' name='_method' value="delete"/>
-              <button type="submit">Delete Task </buttom>
+              <button type="submit">Delete Task</button>
             </form>
-          </div>
             <br>
       Description: <%= task.description %><br>
       Due:         <%= task.due %><br>
