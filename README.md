@@ -1,6 +1,6 @@
- 
 
-## Sinatra Portfolio Project - Flatrion school 
+
+## Sinatra Portfolio Project - Flatrion school
 
 ## Overview
 
@@ -20,7 +20,7 @@
 
 ## About This Project
 
-This project uses the [Sinatra](http://sinatrarb.com/) library, a _microframework_ written in Ruby and used to quickly build web applications. 
+This project uses the [Sinatra](http://sinatrarb.com/) library, a _microframework_ written in Ruby and used to quickly build web applications.
 and Corneal framework
 
 ## Installation instructions
@@ -30,3 +30,16 @@ Clone this repo into your local environment and run the following commands:
 1. `$ gem install bundler` ... to install [Bundler](https://bundler.io/)
 1. `$ bundle install` ... to install the [Ruby Gems](https://rubygems.org/).
 2. `$ shotgun` ... to boot up your server
+
+##Important parts to consider, after done with the projec:
+
+
+- different types of http requests (get, post, etc) and when we use one versus another
+- you should be able to walk me through a get request from start to finish. For example, I make __ request in the browser, which goes to ___ method in my application, which is then processed by ____.
+- you should be able to walk me through a post request from start to finish as well
+- what is the difference between rendering and redirecting? Here is a nice blog post on the subject: https://medium.com/@thorntonbrenden/to-render-or-to-redirect-that-is-the-question-b94e3bcac2e0
+- when do we need to set instance variables in a controller, and when should we use local variables instead?
+- what is the purpose of Rack::MethodOverride, and what does it do?
+- what does the .authenticate method do, and where does it come from?
+- what is params, and where can we access it in our program? Where do the keys in the params hash come from?
+- what is ReST and why is it important?
